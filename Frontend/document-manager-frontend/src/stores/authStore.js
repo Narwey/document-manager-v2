@@ -30,15 +30,15 @@ export const useAuthStore = defineStore('auth', () => {
 
   // Initialize the store from localStorage
   const initAuth = () => {
+    const storedUser = localStorage.getItem('user');
+    const storedToken = localStorage.getItem('token');
 
-    if(localStorage.getItem('user')  && localStorage.getItem('token')) {
-      const storedUser = JSON.parse(localStorage.getItem('user'));
-      const storedToken = localStorage.getItem('token');
-      user.value = storedUser;
+    if (storedUser && storedToken) {
+      user.value = JSON.parse(storedUser);
       token.value = storedToken;
       isAuthenticated.value = true;
     }
   };
 
-  return { user, token, isAuthenticated, login, logout , initAuth };
+  return { user, token, isAuthenticated, login, logout, initAuth };
 });

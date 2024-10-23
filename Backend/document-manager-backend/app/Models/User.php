@@ -36,6 +36,13 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+    public function documents()
+    {
+
+        return $this->hasMany(Document::class);
+
+    }
+
     /**
      * Get the attributes that should be cast.
      *
