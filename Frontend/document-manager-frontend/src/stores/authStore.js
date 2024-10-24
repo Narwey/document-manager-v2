@@ -1,12 +1,14 @@
 import { defineStore } from 'pinia';
+import { useRouter } from 'vue-router';
 import { ref } from 'vue';
 
 export const useAuthStore = defineStore('auth', () => {
-  const user = ref(null); // Store user data
-  const token = ref(null); // Store token
-  const isAuthenticated = ref(false); // Track authentication status
+  const user = ref(null); 
+  const token = ref(null); 
+  const isAuthenticated = ref(false);
+  const router = useRouter(); 
 
-  // Login method to store user data and token
+  
   const login = (userData, userToken) => {
     user.value = userData;
     token.value = userToken;
@@ -26,6 +28,8 @@ export const useAuthStore = defineStore('auth', () => {
     // Clear from localStorage
     localStorage.removeItem('user');
     localStorage.removeItem('token');
+
+    router.push('/');
   };
 
   // Initialize the store from localStorage

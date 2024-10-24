@@ -33,8 +33,9 @@ class DocumentController extends Controller
 
 
     {
+
         $request->validate([
-            'file' => 'required|mimes:pdf,docx,doc,pptx,ppt,xls,xlsx,jpg|max:2048',
+            'file' => 'required|mimes:pdf,docx,doc,pptx,ppt,xls,xlsx,jpg',
             'title' => 'required|string|max:255',
             'category_id' => 'required|exists:categories,id',
         ]);
@@ -79,6 +80,28 @@ class DocumentController extends Controller
 
         return response()->json($documents);
     }
+
+    public function download($id)
+{
+    $document = Document::findOrFail($id);
+
+    try {
+        // Get the file from S3/MinIO
+        $fileStream = $this->s3->getObject([
+            'Bucket' => env('AWS_BUCKET'),
+            'Key'    => $document->file_path,
+        ]);
+
+        return response($fileStream['Body'], 200)
+            ->header('Content-Type', $fileStream['ContentType'])
+            ->header('Content-Disposition', 'attachment; filename="' . basename($document->file_path) . '"');
+    } catch (S3Exception $e) {
+        return response()->json([
+            'error' => 'Download Failed: ' . $e->getMessage(),
+        ], 500);
+    }
+}
+
 
     // Delete Document
     public function delete($id)

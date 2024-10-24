@@ -44,7 +44,7 @@ class UserController extends Controller
         'firstName' => 'sometimes|string|max:255',
         'lastName' => 'sometimes|string|max:255',
         'email' => 'sometimes|email|unique:users,email,' . $user->id,
-        'role' => 'sometimes|in:user,admin', // Validate role to allow only 'User' or 'Admin'
+        'role' => 'sometimes|in:user,admin,manager', // Validate role to allow only 'User' or 'Admin'
     ]);
 
     // Update the user with the validated data

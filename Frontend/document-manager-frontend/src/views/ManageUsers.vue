@@ -29,7 +29,8 @@
                   <span
                     :class="{
                       'bg-green-200 text-green-600 py-1 px-3 rounded-full text-xs': user.role === 'user',
-                      'bg-blue-200 text-blue-600 py-1 px-3 rounded-full text-xs': user.role === 'admin'
+                      'bg-blue-200 text-blue-600 py-1 px-3 rounded-full text-xs': user.role === 'admin' ,
+                      'bg-red-500 text-white py-1 px-3 rounded-full text-xs': user.role === 'manager'
                     }"
                   >
                     {{ user.role }}
@@ -85,6 +86,7 @@
             <select v-model="selectedUser.role" class="w-full mb-4 px-4 py-2 border rounded">
               <option value="user">user</option>
               <option value="admin">admin</option>
+              <option value="manager">manager</option>
             </select>
             <div class="flex justify-center">
               <button class="px-4 py-2 bg-gray-500 text-white rounded mr-2" @click="closeEditModal">

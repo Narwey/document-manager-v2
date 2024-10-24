@@ -15,10 +15,10 @@ class EnsureAdmin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if ($request->user() && $request->user()->role === 'admin') {
+        if ($request->user() &&  ($request->user()->role === 'admin') || ($request->user()->role === 'manager')) {
             return $next($request);
         }
 
-        return response()->json(['message' => 'Access denied. Admins only.'], 403);
+        return response()->json(['message' => 'Access denied. you do not have permissions.'], 403);
     }
 }

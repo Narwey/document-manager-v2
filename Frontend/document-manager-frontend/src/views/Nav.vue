@@ -41,7 +41,7 @@
               </router-link>
             </template>
             <template v-else>
-              <span class="text-gray-600 text-sm font-medium">Hello, {{ authStore.user.firstName }}</span>
+              <span class="text-gray-600 text-sm font-medium"> {{ authStore.user.firstName }} {{ authStore.user.lastName }} </span>
               <button
                 @click="logout"
                 class="bg-green-600 text-white px-4 py-2 rounded-full text-sm font-semibold hover:bg-green-700 transition-colors"

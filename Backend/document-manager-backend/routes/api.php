@@ -20,9 +20,10 @@ Route::apiResource('users', UserController::class)
 Route::apiResource('categories', CategoryController::class)
     ->middleware(['auth:sanctum', EnsureAdmin::class]);
 
+Route::get('/documents/categories' , [CategoryController::class , 'index'])->middleware('auth:sanctum');
 
-
-    Route::post('/documents/upload', [DocumentController::class, 'upload']);
-    Route::get('/documents/category/{id}', [DocumentController::class, 'getByCategory']);
-    Route::delete('/documents/{id}', [DocumentController::class, 'delete']);
+    Route::get('/documents/{id}/download', [DocumentController::class, 'download'])->middleware('auth:sanctum');
+    Route::post('/documents/upload', [DocumentController::class, 'upload'])->middleware('auth:sanctum');
+    Route::get('/documents/category/{id}', [DocumentController::class, 'getByCategory'])->middleware('auth:sanctum');
+    Route::delete('/documents/{id}', [DocumentController::class, 'delete'])->middleware('auth:sanctum');
 

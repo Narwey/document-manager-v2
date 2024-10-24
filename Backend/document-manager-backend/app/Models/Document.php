@@ -2,11 +2,16 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Document extends Model
+
+
 {
-    protected $fillable = ['title', 'file_path', 'file_type', 'category_id'];
+    use HasFactory ;
+
+    protected $fillable = ['title', 'file_path', 'user_id' , 'file_type', 'category_id'];
 
     public function category()
     {

@@ -121,10 +121,9 @@
   // Fetch Categories from API
   const fetchCategories = async () => {
     try {
-      const { data } = await axios.get('/categories')
+      const { data } = await axios.get('/documents/categories')
       categories.value = data
 
-      console.log('data' , data);
     } catch (error) {
       console.error('Error fetching categories:', error)
     }
@@ -188,9 +187,24 @@
 };
 
   
-  const downloadDocument = (document) => {
-    window.open(document.file_link, '_blank')
+const downloadDocument = async (document) => {
+  try {
+    const response = await axios.get(`documents/${document.id}/download`, {
+      responseType: 'blob', // Important to handle file downloads
+    });
+
+    const url = window.URL.createObjectURL(new Blob([response.data]));
+    const link = window.document.createElement('a');
+    link.href = url;
+    link.setAttribute('download', document.title); // Set the file name for download
+    window.document.body.appendChild(link);
+    link.click();
+    link.remove(); // Clean up
+  } catch (error) {
+    console.error('Error downloading document:', error);
   }
+};
+
   
   const deleteDocument = async (document) => {
     try {
