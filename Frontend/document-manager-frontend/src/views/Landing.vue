@@ -107,7 +107,7 @@
 <script>
 import Navbar from "./Nav.vue";
 
-const WEB3FORMS_ACCESS_KEY = "YOUR_ACCESS_KEY_HERE"; // Replace with your Web3Forms access key
+const WEB3FORMS_ACCESS_KEY = "7ef80177-acd6-4b6b-83c4-bef49cbe4b59"; // Replace with your Web3Forms access key
 
 export default {
   components: {
