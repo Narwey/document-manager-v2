@@ -10,7 +10,7 @@
       }
     ],
     "paths": {
-      "/auth/register": {
+      "/register": {
         "post": {
           "summary": "Register a new user",
           "tags": ["Authentication"],
@@ -38,7 +38,7 @@
           }
         }
       },
-      "/auth/login": {
+      "/login": {
         "post": {
           "summary": "Login user",
           "tags": ["Authentication"],

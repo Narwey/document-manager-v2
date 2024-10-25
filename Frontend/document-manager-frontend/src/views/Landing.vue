@@ -105,6 +105,7 @@
 </template>
 
 <script>
+import Swal from "sweetalert2";
 import Navbar from "./Nav.vue";
 
 const WEB3FORMS_ACCESS_KEY = "7ef80177-acd6-4b6b-83c4-bef49cbe4b59"; // Replace with your Web3Forms access key
@@ -123,6 +124,7 @@ export default {
   methods: {
     async submitForm() {
       try {
+        
         const response = await fetch("https://api.web3forms.com/submit", {
           method: "POST",
           headers: {
@@ -139,15 +141,27 @@ export default {
 
         const result = await response.json();
         if (result.success) {
-          console.log("Message sent successfully:", result);
-          alert("Your message has been sent!");
+          Swal.fire({
+            icon: "success",
+            title: "Message Sent!",
+            text: "Your message has been sent successfully.",
+            confirmButtonText: "OK",
+          });
+
           this.resetForm();
         } else {
-          alert("Failed to send message. Please try again.");
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Failed to send message. Please try again.",
+          });
         }
       } catch (error) {
-        console.error("Error sending message:", error);
-        alert("An error occurred. Please try again.");
+        Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Failed to send message. Please try again.",
+          });
       }
     },
     resetForm() {
