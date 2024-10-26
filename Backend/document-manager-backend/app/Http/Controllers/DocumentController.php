@@ -73,10 +73,15 @@ class DocumentController extends Controller
         }
     }
 
-    // Get Documents by Category
+
+
+
+
+    // Get Documents by Category and By user
     public function getByCategory($categoryId)
     {
-        $documents = Document::where('category_id', $categoryId)->with('user')->get();
+        $userId = Auth::id();
+        $documents = Document::where('category_id', $categoryId)->where('user_id', $userId)->with('user')->get();
 
         return response()->json($documents);
     }

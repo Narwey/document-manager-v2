@@ -66,7 +66,7 @@
           }
         }
       },
-      "/auth/logout": {
+      "/logout": {
         "post": {
           "summary": "Logout user",
           "tags": ["Authentication"],
