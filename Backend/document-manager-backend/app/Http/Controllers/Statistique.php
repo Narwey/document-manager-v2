@@ -10,12 +10,13 @@ use App\Models\User;
 class Statistique extends Controller
 {
     public function statistic() {
-        $countUsers = User::all()->count();
-       $countCategories = Category::count();
-       $countDocuments = Document::count();
+        $Users = User::all();
+        $usersCount = count($Users);
+        $countCategories = Category::count();
+        $countDocuments = Document::count();
 
        $results = [
-        'countUsers' => $countUsers ,
+        'countUsers' => $usersCount ,
         'countCategories'=> $countCategories ,
         'countDocuments' => $countDocuments
        ];

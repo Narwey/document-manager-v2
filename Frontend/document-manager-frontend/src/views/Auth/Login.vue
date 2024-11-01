@@ -53,7 +53,8 @@
   </template>
   
   <script>
-  import axios from '../../axios';
+  import Swal from 'sweetalert2';
+import axios from '../../axios';
   import { useAuthStore } from '../../stores/authStore';
   
   export default {
@@ -81,11 +82,16 @@
           });
   
           const { user, token } = response.data;
+
+        
+            
+              authStore.login(user, token);
+              this.$router.push('/');
+            
+          
+           
   
-          // Save token in localStorage
-            authStore.login(user, token);
-  
-          this.$router.push('/');
+          
         } catch (error) {
           
           if (error.response && error.response.data.message) {
